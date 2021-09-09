@@ -3,7 +3,7 @@ import { QuestionItem } from './question-item';
 import { loremIpsum } from 'lorem-ipsum';
 // const loremIpsum = require("lorem-ipsum").loremIpsum;
 
-var index = 0;
+var index = 1;
 const questionCount = 10;
 
 export const QUESTIONS: QuestionItem[] = [];

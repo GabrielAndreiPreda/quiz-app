@@ -1,17 +1,6 @@
 <div>
-  <mat-list>
-    <mat-list-item *ngFor="let questionItem of questionItems">
-      <h1 matLine>{{ questionItem.question.text }}</h1>
-      <mat-action-list matLine matSubheader>
-        <button
-          id="raised"
-          type="button"
-          mat-raised-button
-          *ngFor="let answer of questionItem.answerGroup.answers"
-        >
-          {{ answer.text }}
-        </button>
-      </mat-action-list>
-    </mat-list-item>
-  </mat-list>
+  <app-question-card
+    *ngFor="let questionItem of questionItems"
+    [questionItem]="questionItem"
+  ></app-question-card>
 </div>

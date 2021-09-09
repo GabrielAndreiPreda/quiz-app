@@ -1,0 +1,12 @@
+<mat-card>
+  <mat-card-title>{{
+    questionItem.id + ". " + questionItem.question.text
+  }}</mat-card-title>
+  <mat-card-actions>
+    <app-question-button
+      *ngFor="let answer of questionItem.answerGroup.answers"
+      [questionItem]="questionItem"
+      [answer]="answer"
+    ></app-question-button>
+  </mat-card-actions>
+</mat-card>
