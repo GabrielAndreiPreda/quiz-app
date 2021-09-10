@@ -2,8 +2,10 @@
   <app-question-card
     *ngFor="let questionItem of questionItems"
     [questionItem]="questionItem"
+    [disableAfterClick]="true"
   ></app-question-card>
   <app-score-card
     *ngIf="scoreService.questionCounter == scoreService.maxScore"
   ></app-score-card>
+  <app-back-button></app-back-button>
 </div>

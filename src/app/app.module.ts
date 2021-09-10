@@ -12,6 +12,9 @@ import { QuestionListComponent } from './question-list/question-list.component';
 import { QuestionCardComponent } from './question-card/question-card.component';
 import { QuestionButtonComponent } from './question-button/question-button.component';
 import { ScoreCardComponent } from './score-card/score-card.component';
+import { MainMenuComponent } from './main-menu/main-menu.component';
+import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+import { BackButtonComponent } from './back-button/back-button.component';
 
 @NgModule({
   declarations: [
@@ -21,6 +24,9 @@ import { ScoreCardComponent } from './score-card/score-card.component';
     QuestionCardComponent,
     QuestionButtonComponent,
     ScoreCardComponent,
+    MainMenuComponent,
+    PageNotFoundComponent,
+    BackButtonComponent,
   ],
   imports: [
     BrowserModule,

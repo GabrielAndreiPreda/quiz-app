@@ -8,6 +8,7 @@ import { QuestionItem } from '../question-item';
 })
 export class QuestionCardComponent {
   @Input() questionItem!: QuestionItem;
+  @Input() disableAfterClick!: boolean;
   disabled: boolean = false;
   disabledChange!: boolean;
 

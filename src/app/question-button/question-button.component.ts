@@ -13,6 +13,7 @@ export class QuestionButtonComponent {
   @Input() questionItem!: QuestionItem;
   @Input() answer!: Answer;
   @Input() disabled!: boolean;
+  @Input() disableAfterClick!: boolean;
   @Output() disabledChange = new EventEmitter<boolean>();
 
   correct: boolean = false;
@@ -23,7 +24,9 @@ export class QuestionButtonComponent {
   ngOnInit(): void {}
 
   buttonClicked() {
-    this.disabledChange.emit(true);
+    if (this.disableAfterClick) {
+      this.disabledChange.emit(true);
+    }
     this.checkAnswer();
     if (this.correct) {
       this.scoreService.addPoint();

@@ -17,4 +17,10 @@ export class ScoreService {
   incrementCounter(): void {
     this.questionCounter++;
   }
+  getQuestionCount() {
+    return this.questionCounter;
+  }
+  getScore() {
+    return this.score;
+  }
 }

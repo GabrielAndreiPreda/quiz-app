@@ -10,13 +10,10 @@ export class QuestionProviderService {
 
   questionItems: QuestionItem[] = QUESTIONS;
 
-  score: number = 0;
-  maxScore: number = QUESTIONS.length;
-
   getItems() {
     return this.questionItems;
   }
-  addPoint() {
-    this.score++;
+  getQuestionItem(index: number) {
+    return this.questionItems[index];
   }
 }
