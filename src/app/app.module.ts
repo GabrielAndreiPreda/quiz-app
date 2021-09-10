@@ -11,9 +11,17 @@ import { QuestionBoxComponent } from './question-box/question-box.component';
 import { QuestionListComponent } from './question-list/question-list.component';
 import { QuestionCardComponent } from './question-card/question-card.component';
 import { QuestionButtonComponent } from './question-button/question-button.component';
+import { ScoreCardComponent } from './score-card/score-card.component';
 
 @NgModule({
-  declarations: [AppComponent, QuestionBoxComponent, QuestionListComponent, QuestionCardComponent, QuestionButtonComponent],
+  declarations: [
+    AppComponent,
+    QuestionBoxComponent,
+    QuestionListComponent,
+    QuestionCardComponent,
+    QuestionButtonComponent,
+    ScoreCardComponent,
+  ],
   imports: [
     BrowserModule,
     AppRoutingModule,

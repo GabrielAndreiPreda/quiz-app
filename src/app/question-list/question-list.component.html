@@ -3,4 +3,7 @@
     *ngFor="let questionItem of questionItems"
     [questionItem]="questionItem"
   ></app-question-card>
+  <app-score-card
+    *ngIf="scoreService.questionCounter == scoreService.maxScore"
+  ></app-score-card>
 </div>

@@ -1,4 +1,4 @@
-import { Component, Input, Output } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 
 import { Answer } from '../answer';
 import { QuestionItem } from '../question-item';
@@ -12,19 +12,33 @@ import { ScoreService } from '../score.service';
 export class QuestionButtonComponent {
   @Input() questionItem!: QuestionItem;
   @Input() answer!: Answer;
-  disabled: boolean = false;
+  @Input() disabled!: boolean;
+  @Output() disabledChange = new EventEmitter<boolean>();
+
+  correct: boolean = false;
+  incorrect: boolean = false;
 
   constructor(private scoreService: ScoreService) {}
 
   ngOnInit(): void {}
 
-  checkAnswer(): boolean {
-    if (this.answer.id == this.questionItem.correctAnswerId) {
-      return true;
+  buttonClicked() {
+    this.disabledChange.emit(true);
+    this.checkAnswer();
+    if (this.correct) {
+      this.scoreService.addPoint();
     }
-    return false;
+    this.scoreService.incrementCounter();
   }
-  changeColor(color: number) {}
+
+  checkAnswer(): void {
+    if (this.answer.id == this.questionItem.correctAnswerId) {
+      this.correct = true;
+    } else {
+      this.incorrect = true;
+    }
+  }
+
   disableButton() {
     this.disabled = true;
   }

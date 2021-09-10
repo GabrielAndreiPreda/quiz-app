@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, Output } from '@angular/core';
 import { QuestionItem } from '../question-item';
 
 @Component({
@@ -8,8 +8,15 @@ import { QuestionItem } from '../question-item';
 })
 export class QuestionCardComponent {
   @Input() questionItem!: QuestionItem;
+  disabled: boolean = false;
+  disabledChange!: boolean;
 
   constructor() {}
 
   ngOnInit(): void {}
+
+  disableButtons($event: boolean) {
+    this.disabledChange = $event;
+    this.disabled = this.disabledChange;
+  }
 }

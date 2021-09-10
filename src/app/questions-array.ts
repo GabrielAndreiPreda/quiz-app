@@ -4,13 +4,12 @@ import { loremIpsum } from 'lorem-ipsum';
 // const loremIpsum = require("lorem-ipsum").loremIpsum;
 
 var index = 1;
-const questionCount = 10;
+const questionCount = 5;
 
 export const QUESTIONS: QuestionItem[] = [];
 
 function generateQuestions() {
   while (index <= questionCount) {
-    index = index + 1;
     var question: QuestionItem = {
       id: index,
       question: {
@@ -42,6 +41,7 @@ function generateQuestions() {
     };
 
     QUESTIONS.push(question);
+    index = index + 1;
   }
 }
 

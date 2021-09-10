@@ -9,8 +9,12 @@ export class ScoreService {
 
   score: number = 0;
   maxScore: number = this.questionProviderService.questionItems.length;
+  questionCounter: number = 0;
 
   addPoint(): void {
     this.score++;
+  }
+  incrementCounter(): void {
+    this.questionCounter++;
   }
 }

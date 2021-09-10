@@ -1,8 +1,9 @@
 <button
   type="button"
   mat-stroked-button
-  (click)="checkAnswer()"
+  (click)="buttonClicked()"
   [disabled]="disabled"
+  [ngClass]="{ green: correct, red: incorrect }"
 >
   {{ answer.text }}
 </button>
