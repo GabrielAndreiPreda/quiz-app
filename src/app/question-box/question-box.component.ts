@@ -1,4 +1,10 @@
-import { Component, DoCheck, OnInit } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
+  Component,
+  DoCheck,
+  OnInit,
+} from '@angular/core';
 import { QuestionProviderService } from '../question-provider.service';
 import { ScoreService } from '../score.service';
 
@@ -6,11 +12,13 @@ import { ScoreService } from '../score.service';
   selector: 'app-question-box',
   templateUrl: './question-box.component.html',
   styleUrls: ['./question-box.component.scss'],
+  changeDetection: ChangeDetectionStrategy.Default,
 })
 export class QuestionBoxComponent implements DoCheck {
   constructor(
     private questionProviderService: QuestionProviderService,
-    public scoreService: ScoreService
+    public scoreService: ScoreService,
+    private cdr: ChangeDetectorRef
   ) {}
 
   questionCounter = this.scoreService.getQuestionCount();

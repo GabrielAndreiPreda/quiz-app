@@ -1,10 +1,10 @@
 <mat-card>
   <mat-card-title>{{
-    questionItem.id + ". " + questionItem.question.text
+    questionItem.id + ". " + questionItem.questionText
   }}</mat-card-title>
   <mat-card-actions>
     <app-question-button
-      *ngFor="let answer of questionItem.answerGroup.answers"
+      *ngFor="let answer of questionItem.answerGroup"
       [questionItem]="questionItem"
       [answer]="answer"
       [disabled]="disabled"

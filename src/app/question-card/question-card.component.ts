@@ -16,8 +16,8 @@ export class QuestionCardComponent {
 
   ngOnInit(): void {}
 
-  disableButtons($event: boolean) {
-    this.disabledChange = $event;
+  disableButtons(isClicked: boolean) {
+    this.disabledChange = isClicked;
     this.disabled = this.disabledChange;
   }
 }

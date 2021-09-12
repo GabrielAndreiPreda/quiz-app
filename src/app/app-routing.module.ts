@@ -9,7 +9,13 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
 const routes: Routes = [
   { path: '', component: MainMenuComponent },
   { path: 'question-list', component: QuestionListComponent },
-  { path: 'question-box', component: QuestionBoxComponent },
+  {
+    path: 'question-box',
+    loadChildren: () =>
+      import('./question-box/question-box.module').then(
+        (m) => m.QuestionBoxModule
+      ),
+  },
   { path: '**', component: PageNotFoundComponent },
 ];
 

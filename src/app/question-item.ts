@@ -3,7 +3,7 @@ import { Question } from './question';
 
 export interface QuestionItem {
   id: number;
-  question: Question;
+  questionText: string;
   correctAnswerId: number;
-  answerGroup: { parentId: number; answers: Answer[] };
+  answerGroup: Answer[];
 }

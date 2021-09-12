@@ -12,32 +12,27 @@ function generateQuestions() {
   while (index <= questionCount) {
     var question: QuestionItem = {
       id: index,
-      question: {
-        parentId: index,
-        text: loremIpsum(),
-      },
+      questionText: loremIpsum(),
+
       correctAnswerId: 4,
-      answerGroup: {
-        parentId: index,
-        answers: [
-          {
-            id: 1,
-            text: loremIpsum().slice(0, 5),
-          },
-          {
-            id: 2,
-            text: loremIpsum().slice(0, 5),
-          },
-          {
-            id: 3,
-            text: loremIpsum().slice(0, 5),
-          },
-          {
-            id: 4,
-            text: loremIpsum().slice(0, 5),
-          },
-        ],
-      },
+      answerGroup: [
+        {
+          id: 1,
+          text: loremIpsum().slice(0, 5),
+        },
+        {
+          id: 2,
+          text: loremIpsum().slice(0, 5),
+        },
+        {
+          id: 3,
+          text: loremIpsum().slice(0, 5),
+        },
+        {
+          id: 4,
+          text: loremIpsum().slice(0, 5),
+        },
+      ],
     };
 
     QUESTIONS.push(question);
