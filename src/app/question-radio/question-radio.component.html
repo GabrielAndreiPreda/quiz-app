@@ -1,0 +1,8 @@
+<mat-radio-group>
+  <mat-radio-button
+    *ngFor="let answer of questionItem.answerGroup; index as i"
+    value="i"
+  >
+    {{ answer.text }}
+  </mat-radio-button>
+</mat-radio-group>

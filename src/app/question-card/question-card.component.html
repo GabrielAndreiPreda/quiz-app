@@ -3,13 +3,10 @@
     questionItem.id + ". " + questionItem.questionText
   }}</mat-card-title>
   <mat-card-actions>
-    <app-question-button
-      *ngFor="let answer of questionItem.answerGroup"
+    <app-question-radio
       [questionItem]="questionItem"
-      [answer]="answer"
-      [disabled]="disabled"
-      (disabledChange)="disableButtons($event)"
-      [disableAfterClick]="disableAfterClick"
-    ></app-question-button>
+      [answerGroup]="questionItem.answerGroup"
+    >
+    </app-question-radio>
   </mat-card-actions>
 </mat-card>

@@ -32,6 +32,10 @@ function generateQuestions() {
           id: 4,
           text: loremIpsum().slice(0, 5),
         },
+        {
+          id: 5,
+          text: loremIpsum().slice(0, 5),
+        },
       ],
     };
 
