@@ -1,4 +1,5 @@
 import { Component, Input, Output } from '@angular/core';
+import { FormControl } from '@angular/forms';
 import { QuestionItem } from '../question-item';
 
 @Component({
@@ -8,7 +9,10 @@ import { QuestionItem } from '../question-item';
 })
 export class QuestionCardComponent {
   @Input() questionItem!: QuestionItem;
-  @Input() disableAfterClick!: boolean;
+  @Input() questionNumber!: number;
+  @Input() disabledButtons!: boolean;
+  @Input() radioFormControl!: FormControl;
+
   disabled: boolean = false;
   disabledChange!: boolean;
 

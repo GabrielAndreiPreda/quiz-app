@@ -1,6 +1,14 @@
-div {
+$margin: 2%;
+app-question-card {
+  display: block;
   height: 100%;
+  margin: $margin;
 }
-div > app-question-card {
-  height: 100%;
+.controls {
+  display: flex;
+  margin: $margin;
+  justify-content: space-around;
+
+  & > button {
+  }
 }

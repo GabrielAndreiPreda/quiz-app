@@ -1,11 +1,12 @@
 <div>
   <app-question-card
-    *ngFor="let questionItem of questionItems"
+    *ngFor="let questionItem of questionItems; index as questionNumber"
     [questionItem]="questionItem"
-    [disableAfterClick]="true"
+    [disabledButtons]="false"
+    [questionNumber]="questionNumber"
+    [radioFormControl]="formControlFromIndex(questionNumber)"
   ></app-question-card>
-  <app-score-card
-    *ngIf="scoreService.questionCounter == scoreService.maxScore"
-  ></app-score-card>
+  <button *ngIf="!isSubmitted" (click)="submitAnswers()">Submit Answers</button>
+  <app-score-card *ngIf="isSubmitted"></app-score-card>
   <app-back-button></app-back-button>
 </div>

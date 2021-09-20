@@ -1,8 +1,10 @@
-<mat-radio-group>
+<mat-radio-group [formControl]="radioFormControl">
   <mat-radio-button
-    *ngFor="let answer of questionItem.answerGroup; index as i"
-    value="i"
+    *ngFor="let answer of questionItem.answerGroup"
+    value="{{ answer.id }}"
+    [disabled]="disabled"
   >
     {{ answer.text }}
   </mat-radio-button>
+  <p>Value:{{ radioFormControl.value }}</p>
 </mat-radio-group>

@@ -1,11 +1,35 @@
 <div>
   <app-question-card
-    *ngIf="scoreService.questionCounter != scoreService.maxScore"
+    *ngIf="!isSubmitted"
     [questionItem]="currentQuestionItem"
-    [disableAfterClick]="false"
+    [questionNumber]="questionCounter"
+    [disabledButtons]="false"
+    [radioFormControl]="currentFormControl"
   ></app-question-card>
-  <app-score-card
-    *ngIf="scoreService.questionCounter == scoreService.maxScore"
-  ></app-score-card>
+  <div class="controls" *ngIf="!isSubmitted">
+    <button
+      mat-raised-button
+      (click)="previousQuestion()"
+      disabled="{{ questionCounter == 0 }}"
+    >
+      Previous
+    </button>
+    <button
+      mat-raised-button
+      (click)="nextQuestion()"
+      *ngIf="this.questionCounter < this.questionItems.length - 1"
+    >
+      Next
+    </button>
+    <button
+      mat-raised-button
+      (click)="submitAnswers()"
+      *ngIf="this.questionCounter == this.questionItems.length - 1"
+      disabled="{{ answerFormArray.status == 'INVALID' }}"
+    >
+      Submit
+    </button>
+  </div>
+  <app-score-card *ngIf="isSubmitted"></app-score-card>
   <app-back-button></app-back-button>
 </div>
