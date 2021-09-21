@@ -6,7 +6,24 @@
     [questionNumber]="questionNumber"
     [radioFormControl]="formControlFromIndex(questionNumber)"
   ></app-question-card>
-  <button *ngIf="!isSubmitted" (click)="submitAnswers()">Submit Answers</button>
+  <div
+    [matTooltip]="
+      answerFormArray.status == 'INVALID'
+        ? 'Please fill in the missing answers'
+        : ''
+    "
+    matTooltipPosition="right"
+    style="width: fit-content"
+  >
+    <button
+      mat-raised-button
+      *ngIf="!isSubmitted"
+      (click)="submitAnswers()"
+      [disabled]="answerFormArray.status == 'INVALID'"
+    >
+      Submit Answers
+    </button>
+  </div>
   <app-score-card *ngIf="isSubmitted"></app-score-card>
   <app-back-button></app-back-button>
 </div>

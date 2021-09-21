@@ -1,7 +1,8 @@
 import { Answer } from './answer';
 
-export interface QuestionItem {
+export interface QuestionData {
   id: number;
   questionText: string;
+  correctAnswerId: number;
   answerGroup: Answer[];
 }

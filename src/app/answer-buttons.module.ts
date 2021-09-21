@@ -1,12 +1,13 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatRadioModule } from '@angular/material/radio';
-import { QuestionRadioComponent } from './question-radio.component';
+import { QuestionRadioComponent } from './question-radio/question-radio.component';
 import { FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { QuestionCheckboxComponent } from './question-checkbox/question-checkbox.component';
 
 @NgModule({
-  declarations: [QuestionRadioComponent],
+  declarations: [QuestionRadioComponent, QuestionCheckboxComponent],
   imports: [CommonModule, MatRadioModule, ReactiveFormsModule],
-  exports: [QuestionRadioComponent],
+  exports: [QuestionRadioComponent, QuestionCheckboxComponent],
 })
 export class AnswerButtonsModule {}

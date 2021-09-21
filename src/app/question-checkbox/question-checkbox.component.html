@@ -1,0 +1,7 @@
+<div [formControl]="radioFormControl">
+  <label *ngFor="let answer of questionItem.answerGroup">
+    <input value="{{ answer.id }}" [disabled]="disabled" />
+    {{ answer.text }}
+  </label>
+  <p>Value:{{ radioFormControl.value }}</p>
+</div>

@@ -1,14 +1,16 @@
 import { Injectable } from '@angular/core';
 import { QuestionItem } from './question-item';
 import { QUESTIONS } from './questions-array';
+import { QuestionData } from './questionData';
 
 @Injectable({
   providedIn: 'root',
 })
 export class QuestionProviderService {
-  constructor() {}
+  private questionData: QuestionData[] = QUESTIONS;
+  questionItems: QuestionItem[] = this.questionData;
 
-  questionItems: QuestionItem[] = QUESTIONS;
+  constructor() {}
 
   getItems() {
     return this.questionItems;

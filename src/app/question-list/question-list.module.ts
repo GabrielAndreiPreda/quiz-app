@@ -6,6 +6,8 @@ import { QuestionCardModule } from '../question-card/question-card.module';
 import { ScoreCardModule } from '../score-card/score-card.module';
 import { QuestionListRoutingModule } from './question-list-routing.module';
 import { QuestionListComponent } from './question-list.component';
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { MatButtonModule } from '@angular/material/button';
 
 @NgModule({
   declarations: [QuestionListComponent],
@@ -15,6 +17,8 @@ import { QuestionListComponent } from './question-list.component';
     QuestionCardModule,
     ScoreCardModule,
     BackButtonModule,
+    MatTooltipModule,
+    MatButtonModule,
   ],
 })
 export class QuestionListModule {}

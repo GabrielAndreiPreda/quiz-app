@@ -1,16 +1,17 @@
 import { QuestionItem } from './question-item';
 
 import { loremIpsum } from 'lorem-ipsum';
+import { QuestionData } from './questionData';
 // const loremIpsum = require("lorem-ipsum").loremIpsum;
 
 var index = 1;
 const questionCount = 5;
 
-export const QUESTIONS: QuestionItem[] = [];
+export const QUESTIONS: QuestionData[] = [];
 
 function generateQuestions() {
   while (index <= questionCount) {
-    var question: QuestionItem = {
+    var question: QuestionData = {
       id: index,
       questionText: loremIpsum(),
 
