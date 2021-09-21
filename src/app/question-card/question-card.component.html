@@ -3,11 +3,10 @@
     questionNumber + 1 + ". " + questionItem.questionText
   }}</mat-card-title>
   <mat-card-actions>
-    <app-question-radio
+    <app-question-checkbox
       [questionItem]="questionItem"
       [answerGroup]="questionItem.answerGroup"
       [radioFormControl]="radioFormControl"
-    >
-    </app-question-radio>
+    ></app-question-checkbox>
   </mat-card-actions>
 </mat-card>

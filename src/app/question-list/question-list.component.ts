@@ -29,6 +29,7 @@ export class QuestionListComponent {
     this.questionItems = this.questionProviderService.getItems();
 
     this.answerFormArray = this.fb.array(this.generateFormControlsArray());
+    console.log(this.questionItems);
   }
 
   addForm(formControl: FormControl): void {

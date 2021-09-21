@@ -1,7 +1,12 @@
-<div [formControl]="radioFormControl">
-  <label *ngFor="let answer of questionItem.answerGroup">
-    <input value="{{ answer.id }}" [disabled]="disabled" />
+<div>
+  <label *ngFor="let answer of questionItem.answerGroup; index as i">
+    <input
+      type="checkbox"
+      [value]="answer.id"
+      [disabled]="disabled"
+      [formControl]="this.formControlFromIndex(i)"
+    />
     {{ answer.text }}
   </label>
-  <p>Value:{{ radioFormControl.value }}</p>
+  <p>Value:{{ checkboxGroup.value }}</p>
 </div>

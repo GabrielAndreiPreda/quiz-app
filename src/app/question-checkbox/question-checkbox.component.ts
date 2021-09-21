@@ -1,4 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import {
+  FormArray,
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
+import { Answer } from '../answer';
+import { QuestionItem } from '../question-item';
 
 @Component({
   selector: 'app-question-checkbox',
@@ -11,8 +20,22 @@ export class QuestionCheckboxComponent implements OnInit {
   @Input() questionNumber!: number;
   @Input() disabled!: boolean;
   @Input() radioFormControl!: FormControl;
+  checkboxGroup!: FormArray;
 
-  constructor() {}
+  constructor(private fb: FormBuilder) {}
+  generateFormControlsArray(): FormControl[] {
+    const formControls: FormControl[] = [];
+    for (let i = 0; i < this.answerGroup.length; i++) {
+      formControls.push(new FormControl('', Validators.required));
+    }
+    return formControls;
+  }
+  formControlFromIndex(index: number): FormControl {
+    return this.checkboxGroup.at(index) as FormControl;
+  }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    console.log(this.questionItem);
+    this.checkboxGroup = this.fb.array(this.generateFormControlsArray());
+  }
 }
