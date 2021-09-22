@@ -18,9 +18,7 @@ export class QuestionCardComponent {
 
   constructor() {}
 
-  ngOnInit(): void {
-    console.log(this.questionItem);
-  }
+  ngOnInit(): void {}
 
   disableButtons(isClicked: boolean) {
     this.disabledChange = isClicked;

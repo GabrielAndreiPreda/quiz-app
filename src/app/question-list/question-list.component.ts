@@ -34,7 +34,6 @@ export class QuestionListComponent {
 
   addForm(formControl: FormControl): void {
     this.answerFormArray.push(formControl);
-    console.log(this.answerFormArray);
   }
 
   formControlFromIndex(index: number): FormControl {

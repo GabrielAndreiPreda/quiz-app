@@ -3,7 +3,14 @@
     questionNumber + 1 + ". " + questionItem.questionText
   }}</mat-card-title>
   <mat-card-actions>
+    <app-question-radio
+      *ngIf="!questionItem.multipleChoice"
+      [questionItem]="questionItem"
+      [answerGroup]="questionItem.answerGroup"
+      [radioFormControl]="radioFormControl"
+    ></app-question-radio>
     <app-question-checkbox
+      *ngIf="questionItem.multipleChoice"
       [questionItem]="questionItem"
       [answerGroup]="questionItem.answerGroup"
       [radioFormControl]="radioFormControl"

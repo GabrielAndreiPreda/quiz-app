@@ -23,6 +23,13 @@ export class QuestionCheckboxComponent implements OnInit {
   checkboxGroup!: FormArray;
 
   constructor(private fb: FormBuilder) {}
+
+  get values() {
+    return this.answerGroup
+      .filter((answer) => answer.isChecked)
+      .map((answer) => answer.id);
+  }
+
   generateFormControlsArray(): FormControl[] {
     const formControls: FormControl[] = [];
     for (let i = 0; i < this.answerGroup.length; i++) {
@@ -35,7 +42,6 @@ export class QuestionCheckboxComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    console.log(this.questionItem);
     this.checkboxGroup = this.fb.array(this.generateFormControlsArray());
   }
 }

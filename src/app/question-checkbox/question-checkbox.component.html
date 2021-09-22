@@ -2,11 +2,11 @@
   <label *ngFor="let answer of questionItem.answerGroup; index as i">
     <input
       type="checkbox"
-      [value]="answer.id"
       [disabled]="disabled"
       [formControl]="this.formControlFromIndex(i)"
+      [(ngModel)]="answer.isChecked"
     />
     {{ answer.text }}
   </label>
-  <p>Value:{{ checkboxGroup.value }}</p>
+  <p>Value:{{ values }}</p>
 </div>
