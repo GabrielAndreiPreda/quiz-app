@@ -1,19 +1,21 @@
 <mat-card>
   <mat-card-title>{{
-    questionNumber + 1 + ". " + questionItem.questionText
+    questionNumber + 1 + ". " + questionItem.text
   }}</mat-card-title>
   <mat-card-actions>
     <app-question-radio
-      *ngIf="!questionItem.multipleChoice"
+      *ngIf="!questionItem.isMultipleChoice"
       [questionItem]="questionItem"
-      [answerGroup]="questionItem.answerGroup"
+      [answerGroup]="questionItem.availableAnswers"
       [radioFormControl]="radioFormControl"
+      [answerTable]="answerTable"
     ></app-question-radio>
     <app-question-checkbox
-      *ngIf="questionItem.multipleChoice"
+      *ngIf="questionItem.isMultipleChoice"
       [questionItem]="questionItem"
-      [answerGroup]="questionItem.answerGroup"
+      [answerGroup]="questionItem.availableAnswers"
       [radioFormControl]="radioFormControl"
+      [answerTable]="answerTable"
     ></app-question-checkbox>
   </mat-card-actions>
 </mat-card>

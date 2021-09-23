@@ -1,15 +1,14 @@
-import { Component, OnInit, Output } from '@angular/core';
-import { QuestionItem } from '../question-item';
-import { QuestionProviderService } from '../question-provider.service';
-import { MatListModule } from '@angular/material/list';
-import { ScoreService } from '../score.service';
-import { Validators } from '@angular/forms';
+import { Component } from '@angular/core';
 import {
   FormArray,
   FormBuilder,
   FormControl,
-  NumberValueAccessor,
+  Validators,
 } from '@angular/forms';
+import { Observable } from 'rxjs';
+import { ApiService } from 'src/backend-mockup/api/api.service';
+import { QuestionAnswerProviderService } from '../../backend-mockup/providers/question-answer-provider.service';
+import { Question } from '../../interfaces/question.interface';
 
 @Component({
   selector: 'app-question-list',
@@ -17,32 +16,50 @@ import {
   styleUrls: ['./question-list.component.scss'],
 })
 export class QuestionListComponent {
-  answerFormArray: FormArray;
-  questionItems: QuestionItem[];
+  answerFormArray: FormArray | undefined;
+  questionItems$: Observable<Question[]>;
   isSubmitted: boolean = false;
+  // answerTable: QuestionAnswers[];
 
   constructor(
-    private questionProviderService: QuestionProviderService,
-    public scoreService: ScoreService,
+    private questionProviderService: QuestionAnswerProviderService,
+    public apiService: ApiService,
     private fb: FormBuilder
   ) {
-    this.questionItems = this.questionProviderService.getItems();
+    this.questionItems$ = this.apiService.getQuestions();
 
-    this.answerFormArray = this.fb.array(this.generateFormControlsArray());
-    console.log(this.questionItems);
+    this.questionItems$.subscribe((x) => {
+      this.answerFormArray = this.fb.array(this.generateFormControlsArray(x));
+    });
+
+    // console.log(this.questionItems);
+
+    // this.answerTable = this.generateAnswerTable();
   }
 
-  addForm(formControl: FormControl): void {
-    this.answerFormArray.push(formControl);
-  }
+  // generateAnswerTable() {
+  //   var auxTable: QuestionAnswers[] = [];
+  //   this.questionItems.forEach((item) => {
+  //     var answerTableItem: QuestionAnswers = {
+  //       questionId: item.id,
+  //       answerIds: '0',
+  //     };
+  //     auxTable.push(answerTableItem);
+  //   });
+  //   return auxTable;
+  // }
+
+  // addForm(formControl: FormControl): void {
+  //   this.answerFormArray.push(formControl);
+  // }
 
   formControlFromIndex(index: number): FormControl {
-    return this.answerFormArray.at(index) as FormControl;
+    return this.answerFormArray?.at(index) as FormControl;
   }
 
-  generateFormControlsArray(): FormControl[] {
+  generateFormControlsArray(questionItems: Question[]): FormControl[] {
     const formControls: FormControl[] = [];
-    for (let i = 0; i < this.questionItems.length; i++) {
+    for (let i = 0; i < questionItems.length; i++) {
       formControls.push(new FormControl('', Validators.required));
     }
     return formControls;

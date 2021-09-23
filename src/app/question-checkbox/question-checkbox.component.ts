@@ -6,8 +6,9 @@ import {
   FormGroup,
   Validators,
 } from '@angular/forms';
-import { Answer } from '../answer';
-import { QuestionItem } from '../question-item';
+import { Answer } from '../../interfaces/answer.interface';
+import { QuestionAnswers } from '../../interfaces/question-answers.interface';
+import { Question } from '../../interfaces/question.interface';
 
 @Component({
   selector: 'app-question-checkbox',
@@ -15,20 +16,15 @@ import { QuestionItem } from '../question-item';
   styleUrls: ['./question-checkbox.component.scss'],
 })
 export class QuestionCheckboxComponent implements OnInit {
-  @Input() questionItem!: QuestionItem;
+  @Input() questionItem!: Question;
   @Input() answerGroup!: Answer[];
   @Input() questionNumber!: number;
   @Input() disabled!: boolean;
   @Input() radioFormControl!: FormControl;
-  checkboxGroup!: FormArray;
-
+  @Input() answerTable?: QuestionAnswers[];
+  checkboxGroup!: FormGroup;
+  values!: string;
   constructor(private fb: FormBuilder) {}
-
-  get values() {
-    return this.answerGroup
-      .filter((answer) => answer.isChecked)
-      .map((answer) => answer.id);
-  }
 
   generateFormControlsArray(): FormControl[] {
     const formControls: FormControl[] = [];
@@ -37,11 +33,11 @@ export class QuestionCheckboxComponent implements OnInit {
     }
     return formControls;
   }
-  formControlFromIndex(index: number): FormControl {
+  /* formControlFromIndex(index: number): FormControl {
     return this.checkboxGroup.at(index) as FormControl;
   }
-
+ */
   ngOnInit(): void {
-    this.checkboxGroup = this.fb.array(this.generateFormControlsArray());
+    // this.checkboxGroup = this.fb.array(this.generateFormControlsArray());
   }
 }

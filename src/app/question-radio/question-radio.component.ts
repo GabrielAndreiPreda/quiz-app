@@ -1,17 +1,8 @@
-import { INFERRED_TYPE } from '@angular/compiler/src/output/output_ast';
-import {
-  Component,
-  OnInit,
-  Input,
-  Output,
-  EventEmitter,
-  OnChanges,
-} from '@angular/core';
-import { FormControl, FormBuilder } from '@angular/forms';
-import { MatRadioChange } from '@angular/material/radio';
-
-import { Answer } from '../answer';
-import { QuestionItem } from '../question-item';
+import { Component, Input, OnInit } from '@angular/core';
+import { FormControl } from '@angular/forms';
+import { Answer } from '../../interfaces/answer.interface';
+import { QuestionAnswers } from '../../interfaces/question-answers.interface';
+import { Question } from '../../interfaces/question.interface';
 
 @Component({
   selector: 'app-question-radio',
@@ -19,17 +10,13 @@ import { QuestionItem } from '../question-item';
   styleUrls: ['./question-radio.component.scss'],
 })
 export class QuestionRadioComponent implements OnInit {
-  @Input() questionItem!: QuestionItem;
-  @Input() answerGroup!: Answer[];
+  @Input() questionItem!: Question;
   @Input() questionNumber!: number;
   @Input() disabled!: boolean;
   @Input() radioFormControl!: FormControl;
+  @Input() answerTable!: QuestionAnswers[];
 
   constructor() {}
-  // addFormToArray() {
-  //   this.questionFormsArrayProvider.addForm(this.radioAnswers);
-  // }
-  ngOnInit() {
-    // this.addFormToArray();
-  }
+
+  ngOnInit() {}
 }

@@ -1,8 +1,7 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 
-import { Answer } from '../answer';
-import { QuestionItem } from '../question-item';
-import { ScoreService } from '../score.service';
+import { Answer } from '../../interfaces/answer.interface';
+import { Question } from '../../interfaces/question.interface';
 
 @Component({
   selector: 'app-question-button',
@@ -10,7 +9,7 @@ import { ScoreService } from '../score.service';
   styleUrls: ['./question-button.component.scss'],
 })
 export class QuestionButtonComponent {
-  @Input() questionItem!: QuestionItem;
+  @Input() questionItem!: Question;
   @Input() answer!: Answer;
   @Input() disabled!: boolean;
   @Input() disableAfterClick!: boolean;
@@ -19,27 +18,27 @@ export class QuestionButtonComponent {
   correct: boolean = false;
   incorrect: boolean = false;
 
-  constructor(private scoreService: ScoreService) {}
+  constructor() {}
 
   ngOnInit(): void {}
 
   buttonClicked() {
-    if (this.disableAfterClick) {
-      this.disabledChange.emit(true);
-    }
-    this.checkAnswer();
-    if (this.correct) {
-      this.scoreService.addPoint();
-    }
-    this.scoreService.incrementCounter();
+    // if (this.disableAfterClick) {
+    //   this.disabledChange.emit(true);
+    // }
+    // this.checkAnswer();
+    // if (this.correct) {
+    //   this.scoreService.addPoint();
+    // }
+    // this.scoreService.incrementCounter();
   }
 
   checkAnswer(): void {
-    if (this.answer.id == this.questionItem.correctAnswerId) {
-      this.correct = true;
-    } else {
-      this.incorrect = true;
-    }
+    // if (this.answer.id == this.questionItem.correctAnswerId) {
+    //   this.correct = true;
+    // } else {
+    //   this.incorrect = true;
+    // }
   }
 
   disableButton() {

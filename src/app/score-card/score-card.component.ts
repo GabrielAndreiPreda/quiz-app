@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { ScoreService } from '../score.service';
 
 @Component({
   selector: 'app-score-card',
@@ -7,15 +6,15 @@ import { ScoreService } from '../score.service';
   styleUrls: ['./score-card.component.scss'],
 })
 export class ScoreCardComponent {
-  constructor(private scoreService: ScoreService) {}
+  constructor() {}
 
-  score = this.scoreService.score;
-  maxScore = this.scoreService.maxScore;
-  goodScore: boolean = this.setScoreRatio();
+  // score = this.scoreService.score;
+  // maxScore = this.scoreService.maxScore;
+  // goodScore: boolean = this.setScoreRatio();
   setScoreRatio() {
-    if (this.maxScore / this.score <= 1.3) {
-      return true;
-    } else return false;
+    // if (this.maxScore / this.score <= 1.3) {
+    //   return true;
+    // } else return false;
   }
 
   ngOnInit(): void {}

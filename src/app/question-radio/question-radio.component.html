@@ -1,6 +1,6 @@
 <mat-radio-group [formControl]="radioFormControl">
   <mat-radio-button
-    *ngFor="let answer of questionItem.answerGroup"
+    *ngFor="let answer of questionItem.availableAnswers"
     value="{{ answer.id }}"
     [disabled]="disabled"
   >

@@ -1,11 +1,30 @@
-<div>
-  <app-question-card
+<div *ngIf="questionItems$ | async as questionItems">
+  <ng-container
     *ngFor="let questionItem of questionItems; index as questionNumber"
-    [questionItem]="questionItem"
-    [disabledButtons]="false"
-    [questionNumber]="questionNumber"
-    [radioFormControl]="formControlFromIndex(questionNumber)"
-  ></app-question-card>
+  >
+    <mat-card>
+      <mat-card-title>{{
+        questionNumber + 1 + ". " + questionItem.text
+      }}</mat-card-title>
+      <mat-card-actions>
+        <app-question-radio
+          *ngIf="!questionItem.isMultipleChoice"
+          [questionItem]="questionItem"
+          [answerGroup]="questionItem.availableAnswers"
+          [radioFormControl]="formControlFromIndex(questionNumber)"
+          [answerTable]="answerTable"
+        ></app-question-radio>
+        <app-question-checkbox
+          *ngIf="questionItem.isMultipleChoice"
+          [questionItem]="questionItem"
+          [answerGroup]="questionItem.availableAnswers"
+          [radioFormControl]="formControlFromIndex(questionNumber)"
+          [answerTable]="answerTable"
+        ></app-question-checkbox>
+      </mat-card-actions>
+    </mat-card>
+  </ng-container>
+
   <div
     [matTooltip]="
       answerFormArray.status == 'INVALID'

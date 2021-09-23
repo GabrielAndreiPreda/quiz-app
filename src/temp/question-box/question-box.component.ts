@@ -11,9 +11,8 @@ import {
   FormControl,
   Validators,
 } from '@angular/forms';
-import { QuestionItem } from '../question-item';
-import { QuestionProviderService } from '../question-provider.service';
-import { ScoreService } from '../score.service';
+import { Question } from '../../interfaces/question.interface';
+import { QuestionAnswerProviderService } from '../../backend-mockup/providers/question-answer-provider.service';
 
 @Component({
   selector: 'app-question-box',
@@ -23,19 +22,18 @@ import { ScoreService } from '../score.service';
 })
 export class QuestionBoxComponent {
   answerFormArray: FormArray;
-  questionItems: QuestionItem[];
+  questionItems: Question[];
   isSubmitted: boolean = false;
   questionCounter: number = 0;
-  currentQuestionItem: QuestionItem;
+  currentQuestionItem: Question;
   currentFormControl: FormControl;
 
   constructor(
-    private questionProviderService: QuestionProviderService,
-    public scoreService: ScoreService,
+    private questionProviderService: QuestionAnswerProviderService,
     private cdr: ChangeDetectorRef,
     private fb: FormBuilder
   ) {
-    this.questionItems = this.questionProviderService.getItems();
+    this.questionItems = []; //this.questionProviderService.getItems();
     this.currentQuestionItem = this.questionItems[this.questionCounter];
     this.answerFormArray = this.fb.array(this.generateFormControlsArray());
     this.currentFormControl = this.answerFormArray.at(
