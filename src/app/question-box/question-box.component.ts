@@ -13,6 +13,9 @@ import {
 } from '@angular/forms';
 import { Question } from '../../interfaces/question.interface';
 import { QuestionAnswerProviderService } from '../../backend-mockup/providers/question-answer-provider.service';
+import { Observable } from 'rxjs';
+import { QuestionAnswers } from 'src/interfaces/question-answers.interface';
+import { ApiService } from 'src/backend-mockup/api/api.service';
 
 @Component({
   selector: 'app-question-box',
@@ -21,35 +24,37 @@ import { QuestionAnswerProviderService } from '../../backend-mockup/providers/qu
   changeDetection: ChangeDetectionStrategy.Default,
 })
 export class QuestionBoxComponent {
-  answerFormArray: FormArray;
-  questionItems: Question[];
+  answerFormArray!: FormArray;
+  questionItem$: Observable<Question>;
   isSubmitted: boolean = false;
   questionCounter: number = 0;
-  currentQuestionItem: Question;
-  currentFormControl: FormControl;
+
+  questionsLength$!: Observable<number>;
+
+  currentFormControl!: FormControl;
+
+  answerTable$: Observable<QuestionAnswers[]>;
 
   constructor(
     private questionProviderService: QuestionAnswerProviderService,
     private cdr: ChangeDetectorRef,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    public apiService: ApiService
   ) {
-    this.questionItems = []; //this.questionProviderService.getItems();
-    this.currentQuestionItem = this.questionItems[this.questionCounter];
-    this.answerFormArray = this.fb.array(this.generateFormControlsArray());
-    this.currentFormControl = this.answerFormArray.at(
-      this.questionCounter
-    ) as FormControl;
+    this.questionItem$ = this.apiService.getQuestion(0);
+    this.questionItem$.subscribe();
+    this.questionsLength$ = this.apiService.getQuestionsLength();
+    this.questionsLength$.subscribe((length) => {
+      this.answerFormArray = this.generateFormArray(length);
+    });
+    this.answerTable$ = this.apiService.getAnswerTable();
+    this.answerTable$.subscribe();
   }
 
   private setCurrentFormControl() {
     this.currentFormControl = this.answerFormArray.at(
       this.questionCounter
     ) as FormControl;
-  }
-
-  private setCurrentQuestion() {
-    this.currentQuestionItem = this.questionItems[this.questionCounter];
-    this.setCurrentFormControl();
   }
 
   addForm(formControl: FormControl): void {
@@ -59,29 +64,29 @@ export class QuestionBoxComponent {
   formControlFromIndex(index: number): FormControl {
     return this.answerFormArray.at(index) as FormControl;
   }
-  generateFormControlsArray(): FormControl[] {
-    const formControls: FormControl[] = [];
-    for (let i = 0; i < this.questionItems.length; i++) {
+
+  generateFormArray(length: number): FormArray {
+    const formControls = this.fb.array([]);
+    for (let i = 0; i < length; i++) {
       formControls.push(new FormControl('', Validators.required));
     }
     return formControls;
   }
 
   nextQuestion() {
-    if (this.questionCounter < this.questionItems.length - 1) {
-      this.questionCounter++;
-      this.setCurrentQuestion();
-    }
+    this.questionCounter++;
+    this.questionItem$ = this.apiService.getQuestion(this.questionCounter);
+    this.setCurrentFormControl();
   }
   previousQuestion() {
-    if (this.questionCounter > 0) {
-      this.questionCounter--;
-      this.setCurrentQuestion();
-    }
+    this.questionCounter--;
+    this.questionItem$ = this.apiService.getQuestion(this.questionCounter);
+    this.setCurrentFormControl();
   }
   submitAnswers() {
     this.isSubmitted = true;
     var answers: number[] = this.answerFormArray.value;
     console.log(answers);
   }
+  makeFormControlAndAddToArray() {}
 }

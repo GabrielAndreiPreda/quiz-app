@@ -7,6 +7,7 @@ import {
 } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { ApiService } from 'src/backend-mockup/api/api.service';
+import { QuestionAnswers } from 'src/interfaces/question-answers.interface';
 import { QuestionAnswerProviderService } from '../../backend-mockup/providers/question-answer-provider.service';
 import { Question } from '../../interfaces/question.interface';
 
@@ -16,10 +17,10 @@ import { Question } from '../../interfaces/question.interface';
   styleUrls: ['./question-list.component.scss'],
 })
 export class QuestionListComponent {
-  answerFormArray: FormArray | undefined;
+  answerFormArray!: FormArray;
   questionItems$: Observable<Question[]>;
   isSubmitted: boolean = false;
-  // answerTable: QuestionAnswers[];
+  answerTable$!: Observable<QuestionAnswers[]>;
 
   constructor(
     private questionProviderService: QuestionAnswerProviderService,
@@ -30,28 +31,13 @@ export class QuestionListComponent {
 
     this.questionItems$.subscribe((x) => {
       this.answerFormArray = this.fb.array(this.generateFormControlsArray(x));
+      this.answerTable$ = this.apiService.getAnswerTable();
     });
 
     // console.log(this.questionItems);
 
-    // this.answerTable = this.generateAnswerTable();
+    //
   }
-
-  // generateAnswerTable() {
-  //   var auxTable: QuestionAnswers[] = [];
-  //   this.questionItems.forEach((item) => {
-  //     var answerTableItem: QuestionAnswers = {
-  //       questionId: item.id,
-  //       answerIds: '0',
-  //     };
-  //     auxTable.push(answerTableItem);
-  //   });
-  //   return auxTable;
-  // }
-
-  // addForm(formControl: FormControl): void {
-  //   this.answerFormArray.push(formControl);
-  // }
 
   formControlFromIndex(index: number): FormControl {
     return this.answerFormArray?.at(index) as FormControl;

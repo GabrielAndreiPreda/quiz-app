@@ -10,7 +10,7 @@ import { Question } from '../../interfaces/question.interface';
   styleUrls: ['./question-radio.component.scss'],
 })
 export class QuestionRadioComponent implements OnInit {
-  @Input() questionItem!: Question;
+  @Input() question!: Question;
   @Input() questionNumber!: number;
   @Input() disabled!: boolean;
   @Input() radioFormControl!: FormControl;

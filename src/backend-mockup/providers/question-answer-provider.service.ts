@@ -36,7 +36,7 @@ export class QuestionAnswerProviderService {
     const questionAnswers: QuestionAnswers[] = [];
 
     for (let i = 0; i < count; i++) {
-      const answersNumber = this.getRandom(2, 10);
+      const answersNumber = this.getRandom(3, 6);
       const answer = {
         questionId: i,
         answerIds: generateRandomIds(answersNumber),
@@ -54,7 +54,7 @@ export class QuestionAnswerProviderService {
   }
 
   getRandom(min: number, max: number) {
-    return Math.random() * (max - min) + min;
+    return Math.floor(Math.random() * (max - min + 1) + min);
   }
   randomBool() {
     var bool = Math.floor(Math.random() * 2) >= 1 ? true : false;

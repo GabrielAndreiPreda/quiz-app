@@ -1,16 +1,11 @@
-<form>
-  <div *ngFor="let control of checkboxGroup.controls; index as i">
-    <p>
-      <mat-checkbox [formControl]="formControlFromIndex(i)">{{
-        questionItem.availableAnswers[i].text
-      }}</mat-checkbox>
-    </p>
-  </div>
-  <!-- 
-  <div>
-    <label *ngFor="let answer of questionItem.availableAnswers; index as i">
-      <input type="checkbox" (clicked)="onClick(answer.id)"/>
-      {{ answer.text }}
-    </label>
-  </div> -->
-</form>
+<div *ngFor="let answer of question.availableAnswers; index as i">
+  <p>
+    <input
+      type="checkbox"
+      [formControl]="formControlFromIndex(i)"
+      (change)=""
+    />
+    {{ answer.text }}
+  </p>
+  <p>{{ checkboxArray.value }}</p>
+</div>

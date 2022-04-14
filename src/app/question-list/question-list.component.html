@@ -1,28 +1,28 @@
 <div *ngIf="questionItems$ | async as questionItems">
-  <ng-container
-    *ngFor="let questionItem of questionItems; index as questionNumber"
-  >
-    <mat-card>
-      <mat-card-title>{{
-        questionNumber + 1 + ". " + questionItem.text
-      }}</mat-card-title>
-      <mat-card-actions>
-        <app-question-radio
-          *ngIf="!questionItem.isMultipleChoice"
-          [questionItem]="questionItem"
-          [answerGroup]="questionItem.availableAnswers"
-          [radioFormControl]="formControlFromIndex(questionNumber)"
-          [answerTable]="answerTable"
-        ></app-question-radio>
-        <app-question-checkbox
-          *ngIf="questionItem.isMultipleChoice"
-          [questionItem]="questionItem"
-          [answerGroup]="questionItem.availableAnswers"
-          [radioFormControl]="formControlFromIndex(questionNumber)"
-          [answerTable]="answerTable"
-        ></app-question-checkbox>
-      </mat-card-actions>
-    </mat-card>
+  <ng-container *ngIf="answerTable$ | async as answerTable">
+    <ng-container
+      *ngFor="let questionItem of questionItems; index as questionNumber"
+    >
+      <mat-card>
+        <mat-card-title>{{
+          questionNumber + 1 + ". " + questionItem.text
+        }}</mat-card-title>
+        <mat-card-actions>
+          <app-question-radio
+            *ngIf="!questionItem.isMultipleChoice"
+            [radioFormControl]="formControlFromIndex(questionNumber)"
+            [answerTable]="answerTable"
+            [question]="questionItem"
+          ></app-question-radio>
+          <app-question-checkbox
+            *ngIf="questionItem.isMultipleChoice"
+            [radioFormControl]="formControlFromIndex(questionNumber)"
+            [answerTable]="answerTable"
+            [question]="questionItem"
+          ></app-question-checkbox>
+        </mat-card-actions>
+      </mat-card>
+    </ng-container>
   </ng-container>
 
   <div

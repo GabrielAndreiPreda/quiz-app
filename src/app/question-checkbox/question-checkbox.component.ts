@@ -16,28 +16,35 @@ import { Question } from '../../interfaces/question.interface';
   styleUrls: ['./question-checkbox.component.scss'],
 })
 export class QuestionCheckboxComponent implements OnInit {
-  @Input() questionItem!: Question;
-  @Input() answerGroup!: Answer[];
+  @Input() question!: Question;
   @Input() questionNumber!: number;
   @Input() disabled!: boolean;
   @Input() radioFormControl!: FormControl;
-  @Input() answerTable?: QuestionAnswers[];
-  checkboxGroup!: FormGroup;
-  values!: string;
+  @Input() answerTable!: QuestionAnswers[]; // TODO after submit the array might be different, put an ngclass on the template to paint the input in red if the answer is not in the array of ids
+  checkboxArray!: FormArray;
+  currentTableItem!: number;
+
   constructor(private fb: FormBuilder) {}
 
-  generateFormControlsArray(): FormControl[] {
-    const formControls: FormControl[] = [];
-    for (let i = 0; i < this.answerGroup.length; i++) {
-      formControls.push(new FormControl('', Validators.required));
+  generateFormControlsArray(): FormArray {
+    const formArray = this.fb.array([]);
+    const len = this.question.availableAnswers.length;
+    for (let i = 0; i < len; i++) {
+      formArray.push(new FormControl(false));
     }
-    return formControls;
+    return formArray;
   }
-  /* formControlFromIndex(index: number): FormControl {
-    return this.checkboxGroup.at(index) as FormControl;
+  formControlFromIndex(index: number): FormControl {
+    return this.checkboxArray.at(index) as FormControl;
   }
- */
   ngOnInit(): void {
-    // this.checkboxGroup = this.fb.array(this.generateFormControlsArray());
+    this.checkboxArray = this.generateFormControlsArray();
+    this.currentTableItem = this.answerTable.findIndex(
+      (item) => item.questionId == this.question.id
+    );
+  }
+
+  syncTable(answerId: number) {
+    this.answerTable;
   }
 }

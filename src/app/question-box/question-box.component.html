@@ -1,0 +1,49 @@
+<div *ngIf="questionItem$ | async as questionItem">
+  <ng-component *ngIf="questionsLength$ | async as questionsLength">
+    <ng-component *ngIf="answerTable$ | async as answerTable">
+      <mat-card>
+        <mat-card-title>{{
+          questionCounter + 1 + ". " + questionItem.text
+        }}</mat-card-title>
+        <mat-card-actions *ngIf="answerFormArray">
+          <app-question-radio
+            *ngIf="!questionItem.isMultipleChoice"
+            [radioFormControl]="formControlFromIndex(questionCounter)"
+            [answerTable]="answerTable"
+            [question]="questionItem"
+          ></app-question-radio>
+          <app-question-checkbox
+            *ngIf="questionItem.isMultipleChoice"
+            [radioFormControl]="formControlFromIndex(questionCounter)"
+            [answerTable]="answerTable"
+            [question]="questionItem"
+          ></app-question-checkbox>
+        </mat-card-actions>
+      </mat-card>
+
+      <div class="controls" *ngIf="!isSubmitted">
+        <button
+          mat-raised-button
+          (click)="previousQuestion()"
+          disabled="{{ questionCounter == 0 }}"
+        >
+          Previous
+        </button>
+
+        <!-- *ngIf="this.questionCounter < this.questionItems.length - 1" -->
+        <button mat-raised-button (click)="nextQuestion()">Next</button>
+
+        <!-- *ngIf="this.questionCounter == this.questionItems.length - 1" -->
+        <button
+          mat-raised-button
+          (click)="submitAnswers()"
+          disabled="{{ answerFormArray.status == 'INVALID' }}"
+        >
+          Submit
+        </button>
+      </div>
+      <app-score-card *ngIf="isSubmitted"></app-score-card>
+      <app-back-button></app-back-button>
+    </ng-component>
+  </ng-component>
+</div>
